@@ -39,4 +39,4 @@ while True:
         print("BOOM！")
         break
     flag += 1
-print("残念、%d回目で爆発した。"%flag)
+print("ざんねん、%d回目で爆発した。"%flag)

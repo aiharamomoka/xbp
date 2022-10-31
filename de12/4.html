@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <title>課題2</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <h1>第4回</h1>
+ <div>
+ <h4>
+    1.数あてゲームの逆バージョン<br>
+    爆弾して（負けて）しまう数をランダムでコンピューターが決め、遊ぶ人がその数を当てないようにするゲーム。<br>
+    だんだんと数は狭まっていく…
+ </h4><br>
+<h4>
+    2.<pre><code>
+        import random
+
+name=input("名前を教えてください")
+
+def user_num():
+    num = int(input('数字を入力してください：\n'))
+    return num
+def max_num():
+    max_num = int(input('最大数値を入力：\n'))
+    return max_num
+def min_num():
+    min_num = int(input('最小数値を入力：\n'))
+    return min_num
+        
+min_num,max_num = min_num(),max_num()
+ 
+while True:
+    res = random.randint(min_num,max_num)
+    if res!=min_num and res!=max_num:
+        break
+f = [min_num,max_num]
+
+def comp(a,b):
+    if a>b:
+        f[1] = a
+    else:
+        f[0] = a
+    print("範囲はから{}まで{}，もう一回入力してください".format(f[0],f[1]))
+ 
+flag = 0
+while True:
+    num = user_num()
+    if num not in range(f[0],f[1]):
+        print("範囲外")
+        continue
+    elif num!=res:
+        comp(num,res)
+    elif num==res:
+        print("BOOM！")
+        break
+    flag += 1
+print("ざんねん、%d回目で爆発した。"%flag)
+    </code></pre><br></h4>
+ <h4>3.遊んでる様子（動画が載せられなかったので写真で）<br>
+    <ol>
+        <li>名前を設定<br>
+            <img src="images/game playing 1.jpg" width="70%"><br></li>
+        <li>最大値と最小値の設定<br>
+            <img src="images/game playing 2.png" width="70%"></li><br>
+        <li>数を打つ。その数でなかったら、数の範囲が狭まる<br>
+            <img src="images/game playing 3.png" width="70%"></li><br>
+        <li>爆発したら、負け<br>
+            <img src="images/game playing 4.png" width="70%"></li><br>
+        <li>※もし、打った数が範囲外だったら<br>
+            <img src="images/game playing 5.png" width="70%"></li><br>
+
+    </ol>
+    
+ </h4> 
+</div>
+</body>
+</html>
