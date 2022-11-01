@@ -6,17 +6,73 @@
 </head>
 <body>
     <h1>第5回</h1>
- <div>
- <h4>
-
-
- </h4><br>
+<div>
+    <h2>気温から服装を提案してくれるプログラム</h2>
 <h4>
-    2.<pre><code>
-       
-    </code></pre><br></h4>
- <h4> 
- </h4> 
+    <pre><code>
+        #ライブラリのインポート
+        from regex import E
+        import requests
+        from bs4 import BeautifulSoup
+        
+        
+        #tenki.jpの目的の地域のページのURL（今回は横浜市西区）
+        url = 'https://tenki.jp/forecast/3/17/4610/14103/'
+        
+        #HTTPリクエスト
+        r = requests.get(url)
+        
+        #プロキシ環境下の場合は以下を記述
+        """
+        proxies = {
+            "http":"http://proxy.xxx.xxx.xxx:8080",
+            "https":"http://proxy.xxx.xxx.xxx:8080"
+        }
+        r = requests.get(url, proxies=proxies)
+        """
+        
+        #HTMLの解析
+        bsObj = BeautifulSoup(r.content, "html.parser")
+        
+        #今日の天気を取得
+        today = bsObj.find(class_="today-weather")
+        weather = today.p.string
+        
+        #気温情報のまとまり
+        temp=today.div.find(class_="date-value-wrap")
+        
+        #気温の取得
+        temp=temp.find_all("dd")
+        temp_max = temp[0].span.string #最高気温
+        temp_max_diff=temp[1].string #最高気温の前日比
+        temp_min = temp[2].span.string #最低気温
+        temp_min_diff=temp[3].string #最低気温の前日比
+        
+        #結果の出力
+        print("天気:{}".format(weather))
+        print("最高気温:{} {}".format(temp_max,temp_max_diff))
+        print("最低気温:{} {}".format(temp_min,temp_min_diff))
+        
+        #最高気温からどのような服装が良いか
+        #elifで条件を増やすことができる
+        最高気温=1
+        if 最高気温> 30:
+            print("半袖")
+        elif 最高気温>25:
+            print("半袖シャツ")
+        elif 最高気温<20:
+            print("カーディガン")
+        elif 最高気温<15:
+            print("セーター")
+        elif 最高気温<12:
+            print("トレンチコート")
+        elif 最高気温<8:
+            print("厚手のコート")
+        elif 最高気温<5:
+            print("ダウンコート")
+    </code></pre><br>
+</h4>
+
 </div>
 </body>
 </html>
