@@ -12,7 +12,7 @@ from matplotlib import font_manager
 間取り、面積、URL
 """
 ########################
-factor_1 = ""
+factor_1 = "路線"
 factor_2 = "アクセス"
 ########################
 

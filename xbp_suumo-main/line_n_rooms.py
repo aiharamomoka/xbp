@@ -12,7 +12,7 @@ from matplotlib import font_manager
 間取り、面積、URL
 """
 ########################
-factor = "築年数"
+factor = "階数"
 ########################
 
 # 日本語の設定
